@@ -29,16 +29,13 @@ def loadTestParams(paramsFile):
                 paramsLoaded.append(line.split(","))
             line = f.readline()
 
-def createResultsDir(concurrency, duration, jmxFile):
-    pathName = jmxFile.split("/")
-    fileName = pathName[-1].split(".")
+def createResultsDir():
     userHome = os.getenv("HOME")
     resultsPath = sys.argv[5]
     pathToDesktop = userHome + resultsPath
     date = time.ctime(time.time())
     formatedDate = date.replace(" ", "_").replace(":", ".")
-    folderName = "%s%s_c%s_d%s_%s" % (pathToDesktop, fileName[0], concurrency,
-        duration,formatedDate)
+    folderName = "%s" % (formatedDate)
     os.mkdir(folderName)
     return folderName
 
@@ -46,10 +43,12 @@ def startTestSuite():
     jmeterBin = sys.argv[1]
     JMXFile = sys.argv[3]
     batFile = sys.argv[4] + " "
+    pathName = JMXFile.split("/")
+    fileName = pathName[-1].split(".")
     for keyVal in paramsLoaded:
         concurrency, duration = keyVal
-        dirName = createResultsDir(concurrency, duration, JMXFile)
-        ResultFile = dirName + "/result"    
+        dirName = createResultsDir()
+        ResultFile = dirName + "/" + fileName[0] + "_c" + concurrency + "_d" + duration
         command = "%s %s %s %s %s" % (batFile, concurrency, duration,
             ResultFile, JMXFile) 
         p = os.system(command)
