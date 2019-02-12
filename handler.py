@@ -35,7 +35,7 @@ def createResultsDir():
     pathToDesktop = userHome + resultsPath
     date = time.ctime(time.time())
     formatedDate = date.replace(" ", "_").replace(":", ".")
-    folderName = "%s" % (formatedDate)
+    folderName = "%s%s" % (pathToDesktop, formatedDate)
     os.mkdir(folderName)
     return folderName
 
