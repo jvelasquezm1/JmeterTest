@@ -45,9 +45,9 @@ def startTestSuite():
     batFile = sys.argv[4] + " "
     pathName = JMXFile.split("/")
     fileName = pathName[-1].split(".")
+    dirName = createResultsDir()
     for keyVal in paramsLoaded:
         concurrency, duration = keyVal
-        dirName = createResultsDir()
         ResultFile = dirName + "/" + fileName[0] + "_c" + concurrency + "_d" + duration
         command = "%s %s %s %s %s" % (batFile, concurrency, duration,
             ResultFile, JMXFile) 
