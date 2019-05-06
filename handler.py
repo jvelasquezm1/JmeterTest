@@ -16,11 +16,11 @@ def main():
 
 #Verifying that the number of parameter match with the expected 
 def paramsOk(params):
-    if len(params) < 5:
-        print("Too few params, 4 expected " + str(len(params)-1) + " given")
+    if len(params) < 6:
+        print("Too few params, 5 expected " + str(len(params)-1) + " given")
         return False
-    elif len(params) > 5:
-        print("Too many params, 4 expected. " + str(len(params)-1) + " given")
+    elif len(params) > 6:
+        print("Too many params, 5 expected. " + str(len(params)-1) + " given")
         return False
     return True
 
@@ -48,10 +48,10 @@ def startTestSuite(paramsLoaded):
             duration = str(row['Total Duration'])
             concurrency = str(row['Concurrence Users'])
             rampUpPeriod = str(row['Ramp-Up'])
-            JMXFile = str(row['Jmeter Script'])
-            dirName = createResultsDir(JMXFile)
-            pathName = JMXFile.split("\\") 
-            fileName = pathName[-1].split(".")            
+            JMXFile = sys.argv[5]+str(row['Jmeter Script'])
+            dirName = createResultsDir(str(row['Jmeter Script']))
+            pathName = JMXFile.split("\\")
+            fileName = pathName[-1].split(".")
             ResultFile = dirName + "\\" + fileName[0] + "_c" + concurrency + "_d" + duration
             ResultFileDash = dirName + "\\" + concurrency + "\\"
             command = "%s %s %s %s %s %s %s" % (batFile, concurrency, duration,ResultFile, JMXFile, rampUpPeriod, ResultFileDash) 
