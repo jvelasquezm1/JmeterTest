@@ -1,15 +1,17 @@
 #! /bin/bash
 
-#Route
-services=/performance/assessmentServices/
+dir=${PWD}
+cd ..
+parent=${PWD}
+cd EXECUTION_SUITE
 
 #Files
-handlerPython=${HOME}${services}scripts/handler2.py
-jmeter=${HOME}/performance/apache-jmeter-4.0/bin/jmeter
-params=${HOME}${services}datasets/Params.xlsx
-jmxRoute=${HOME}${services}scripts/
-jmetersh=${HOME}${services}scripts/jmeterResults.sh
-resultsFolder=${services}results/
+handlerPython='./handler4.py'
+jmeter=${JMETER_HOME}'/bin/jmeter'
+params=${dir}'/Params.xlsx'
+jmxRoute=${parent}'/SCRIPTS/Windows/'
+jmetersh=${dir}'/jmeterResults.sh'
+resultsFolder=${parent}'/Results/'
 
 #Execute python command
 python ${handlerPython} ${jmeter} ${params} ${jmetersh} ${resultsFolder} ${jmxRoute}

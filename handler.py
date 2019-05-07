@@ -26,15 +26,15 @@ def paramsOk(params):
 
 #Setting number of execution of the cycle
 def loadTestParams(paramsFile):
-    df = pd.read_excel(paramsFile, sheetname='Sheet1')
+    df = pd.read_excel(paramsFile, sheet_name='Sheet1')
     return df
 
 #Creating bthe folders to save the each execution results
-def createResultsDir(scriptName):
+def createResultsDir(scriptName, concurrency):
     resultsPath = sys.argv[4]
     date = time.ctime(time.time())
     formatedDate = date.replace(" ", "_").replace(":", ".")
-    folderName = "%s%s%s" % (resultsPath, formatedDate, scriptName)
+    folderName = "%s%s%s%s" % (resultsPath, formatedDate, scriptName, concurrency)
     os.mkdir(folderName)
     return folderName
 
@@ -49,7 +49,7 @@ def startTestSuite(paramsLoaded):
             concurrency = str(row['Concurrence Users'])
             rampUpPeriod = str(row['Ramp-Up'])
             JMXFile = sys.argv[5]+str(row['Jmeter Script'])
-            dirName = createResultsDir(str(row['Jmeter Script']))
+            dirName = createResultsDir(str(row['Jmeter Script']), concurrency)
             pathName = os.path.split(JMXFile)
             fileName = pathName[-1].split(".")
             ResultFile = os.path.join(dirName, fileName[0] + "_c" + concurrency + "_d" + duration)
