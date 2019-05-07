@@ -50,10 +50,10 @@ def startTestSuite(paramsLoaded):
             rampUpPeriod = str(row['Ramp-Up'])
             JMXFile = sys.argv[5]+str(row['Jmeter Script'])
             dirName = createResultsDir(str(row['Jmeter Script']))
-            pathName = JMXFile.split("\\")
+            pathName = os.path.split(JMXFile)
             fileName = pathName[-1].split(".")
-            ResultFile = dirName + "\\" + fileName[0] + "_c" + concurrency + "_d" + duration
-            ResultFileDash = dirName + "\\" + concurrency + "\\"
+            ResultFile = os.path.join(dirName, fileName[0] + "_c" + concurrency + "_d" + duration)
+            ResultFileDash = os.path.join(dirName, concurrency)
             command = "%s %s %s %s %s %s %s" % (batFile, concurrency, duration,ResultFile, JMXFile, rampUpPeriod, ResultFileDash) 
             p = os.system(command)
             msg = "Test for Jthread=%s and Jduration=%s ... done" % (concurrency,duration)
