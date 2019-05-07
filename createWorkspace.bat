@@ -1,5 +1,5 @@
 
-rem Step1: Creting workspace
+REM Step1: Creting workspace
 
 REM Global
 SETX dirBase %cd%
@@ -11,33 +11,33 @@ SETX jmeterExePath %JMETER_HOME%\bin\
 SETX jmeterExtPath %JMETER_HOME%\lib\ext\
 
 REM Local
-SET dirBase %cd%
-SET data \Projects\FLEX\FLEX_ASSESSMENT_SERVICES\Data\
-SET results \Projects\FLEX\FLEX_ASSESSMENT_SERVICES\Results\
-SET jmeterScripts \Projects\FLEX\FLEX_ASSESSMENT_SERVICES\SCRIPTS\Windows\
-SET executionSuite \Projects\FLEX\FLEX_ASSESSMENT_SERVICES\EXECUTION_SUITE\
-SET jmeterExePath %JMETER_HOME%\bin\
-SET jmeterExtPath %JMETER_HOME%\lib\ext\
+SET dirBase_=%cd%
+SET data_=\Projects\FLEX\FLEX_ASSESSMENT_SERVICES\Data\
+SET results_=\Projects\FLEX\FLEX_ASSESSMENT_SERVICES\Results\
+SET jmeterScripts_=\Projects\FLEX\FLEX_ASSESSMENT_SERVICES\SCRIPTS\Windows\
+SET executionSuite_=\Projects\FLEX\FLEX_ASSESSMENT_SERVICES\EXECUTION_SUITE\
+SET jmeterExePath_=%JMETER_HOME%\bin\
+SET jmeterExtPath_=%JMETER_HOME%\lib\ext\
 
 REM Step 2: Creating folders
-MKDIR %dirBase%%data%
-MKDIR %dirBase%%results%
-MKDIR %dirBase%%jmeterScripts%
-MKDIR %dirBase%%executionSuite%
+MKDIR %dirBase_%%data_%
+MKDIR %dirBase_%%results_%
+MKDIR %dirBase_%%jmeterScripts_%
+MKDIR %dirBase_%%executionSuite_%
 
-SETX DATA_JSCRIPTS %dirBase%%data%
-SETX RESULT_JSCRIPTS %dirBase%%results%
+SETX DATA_JSCRIPTS %dirBase_%%data_%
+SETX RESULT_JSCRIPTS %dirBase_%%results_%
 
-SET DATA_JSCRIPTS %dirBase%%data%
-SET RESULT_JSCRIPTS %dirBase%%results%
+SET DATA_JSCRIPTS_ %dirBase_%%data_%
+SET RESULT_JSCRIPTS_ %dirBase_%%results_%
 
 REM Step 3: Creating files
-SET executionSuiteZip=%dirBase%/executionSuite.zip
-SET jmeterScriptsZip=%dirBase%/jmeterScripts.zip
-SET dataZip=%dirBase%/data.zip
+SET executionSuiteZip_=%dirBase_%/executionSuite.zip
+SET jmeterScriptsZip_=%dirBase_%/jmeterScripts.zip
+SET dataZip_=%dirBase_%/data.zip
 
-PowerShell Expand-Archive -Path %executionSuiteZip% -DestinationPath %dirBase%%executionSuite%
+PowerShell Expand-Archive -Path %executionSuiteZip_% -DestinationPath %dirBase_%%executionSuite_%
 
-PowerShell Expand-Archive -Path %jmeterScriptsZip% -DestinationPath %dirBase%%jmeterScripts%
+PowerShell Expand-Archive -Path %jmeterScriptsZip_% -DestinationPath %dirBase_%%jmeterScripts_%
 
-PowerShell Expand-Archive -Path %dataZip% -DestinationPath %DATA_JSCRIPTS%
+PowerShell Expand-Archive -Path %dataZip_% -DestinationPath %DATA_JSCRIPTS_%
