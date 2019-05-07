@@ -9,6 +9,9 @@ ResultFileDash=$6
 jmeterExePath=${JMETER_HOME}'/bin/'
 jmeterExtPath=${JMETER_HOME}'/lib/ext/'
 
+cd ..
+cd Results
+
 ${jmeterExePath}jmeter -Jthreads=${concurrence} -Jduration=${duration} -JrampUpPeriod=${rampUpPeriod} -n -t ${jmxPath} -l ${resultFile}.jtl >> ${resultFile}.log -e -o ${ResultFileDash}
 
 ${jmeterExtPath}JMeterPluginsCMD.sh --generate-csv ${resultFile}.csv --input-jtl ${resultFile}.jtl --plugin-type AggregateReport

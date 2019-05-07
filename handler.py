@@ -4,59 +4,65 @@ import time
 import pandas as pd
 import numpy
 
-#python <pythonFile> <binJmeter> <paramsFile> <jmxFile> <script.bat>
 
-#Reading concurrence, duration and ramp up paramneters from params.txt
+# python <pythonFile> <bin_jmeter> <params_file> <jmx_file> <script.bat>
+
+# Reading concurrence, duration and ramp up parameters from params.txt
 def main():
-    if not paramsOk(sys.argv):
+    if not params_ok(sys.argv):
         sys.exit()
-    paramsFile = sys.argv[2]
-    paramsLoaded = loadTestParams(paramsFile)
-    startTestSuite(paramsLoaded)
+    params_file = sys.argv[2]
+    params_loaded = load_test_params(params_file)
+    start_test_suite(params_loaded)
 
-#Verifying that the number of parameter match with the expected 
-def paramsOk(params):
+
+# Verifying that the number of parameter match with the expected
+def params_ok(params):
     if len(params) < 6:
-        print("Too few params, 5 expected " + str(len(params)-1) + " given")
+        print("Too few params, 5 expected " + str(len(params) - 1) + " given")
         return False
     elif len(params) > 6:
-        print("Too many params, 5 expected. " + str(len(params)-1) + " given")
+        print("Too many params, 5 expected. " + str(len(params) - 1) + " given")
         return False
     return True
 
-#Setting number of execution of the cycle
-def loadTestParams(paramsFile):
-    df = pd.read_excel(paramsFile, sheet_name='Sheet1')
+
+# Setting number of execution of the cycle
+def load_test_params(params_file):
+    df = pd.read_excel(params_file, sheet_name='Sheet1')
     return df
 
-#Creating bthe folders to save the each execution results
-def createResultsDir(scriptName, concurrency):
-    resultsPath = sys.argv[4]
-    date = time.ctime(time.time())
-    formatedDate = date.replace(" ", "_").replace(":", ".")
-    folderName = "%s%s%s%s" % (resultsPath, formatedDate, scriptName, concurrency)
-    os.mkdir(folderName)
-    return folderName
 
-# Creatring parameters to jmeterResults script (jmeterResults2.bat)	
-def startTestSuite(paramsLoaded):
-	
-    jmeterBin = sys.argv[1]
-    batFile = sys.argv[3] + " "
-    for index, row in paramsLoaded.iterrows():
-        if(row['Total Duration'] == row['Total Duration']):
-            duration = str(row['Total Duration'])
-            concurrency = str(row['Concurrence Users'])
-            rampUpPeriod = str(row['Ramp-Up'])
-            JMXFile = sys.argv[5]+str(row['Jmeter Script'])
-            dirName = createResultsDir(str(row['Jmeter Script']), concurrency)
-            pathName = os.path.split(JMXFile)
-            fileName = pathName[-1].split(".")
-            ResultFile = os.path.join(dirName, fileName[0] + "_c" + concurrency + "_d" + duration)
-            ResultFileDash = os.path.join(dirName, concurrency)
-            command = "%s %s %s %s %s %s %s" % (batFile, concurrency, duration, ResultFile, JMXFile, rampUpPeriod, ResultFileDash) 
-            p = os.system(command)
-            msg = "Test for Jthread=%s and Jduration=%s ... done" % (concurrency,duration)
+# Creating the folders to save the each execution results
+def create_results_dir(script_name):
+    results_path = sys.argv[4]
+    date = time.ctime(time.time())
+    formatted_date = date.replace(" ", "_").replace(":", ".")
+    folder_name = "%s%s%s" % (results_path, formatted_date, script_name)
+    if not os.path.exists(folder_name):
+        os.mkdir(folder_name)
+    return folder_name
+
+
+# Creating parameters to jmeter_results script (jmeterResults2.bat)
+def start_test_suite(params_loaded):
+    bat_file = sys.argv[3] + " "
+    for index, row in params_loaded.iterrows():
+        if row['Total Duration'] == row['Total Duration']:
+            duration = str(int(row['Total Duration']))
+            concurrency = str(int(row['Concurrence Users']))
+            ramp_up_period = str(int(row['Ramp-Up']))
+            jmx_file = sys.argv[5] + str(row['Jmeter Script'])
+            dir_name = create_results_dir(str(row['Jmeter Script']))
+            path_name = os.path.split(jmx_file)
+            file_name = path_name[-1].split(".")
+            result_file = os.path.join(dir_name, file_name[0] + "_c" + concurrency + "_d" + duration)
+            result_file_dash = os.path.join(dir_name, concurrency)
+            command = "%s %s %s %s %s %s %s" % (
+                bat_file, concurrency, duration, result_file, jmx_file, ramp_up_period, result_file_dash)
+            os.system(command)
+            msg = "Test for Jthread=%s and Jduration=%s ... done" % (concurrency, duration)
             print(msg)
+
 
 main()
