@@ -54,7 +54,7 @@ def startTestSuite(paramsLoaded):
             fileName = pathName[-1].split(".")
             ResultFile = os.path.join(dirName, fileName[0] + "_c" + concurrency + "_d" + duration)
             ResultFileDash = os.path.join(dirName, concurrency)
-            command = "%s %s %s %s %s %s %s" % (batFile, concurrency, duration,ResultFile, JMXFile, rampUpPeriod, ResultFileDash) 
+            command = "%s %s %s %s %s %s %s" % (batFile, concurrency, duration, ResultFile, JMXFile, rampUpPeriod, ResultFileDash) 
             p = os.system(command)
             msg = "Test for Jthread=%s and Jduration=%s ... done" % (concurrency,duration)
             print(msg)
