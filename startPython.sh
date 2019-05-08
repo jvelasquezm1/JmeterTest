@@ -6,9 +6,9 @@ parent=${PWD}
 cd EXECUTION_SUITE
 
 #Files
-handlerPython='./handler4.py'
+handlerPython=${dir}'/handler.py'
 jmeter=${JMETER_HOME}'/bin/jmeter'
-params=${dir}'/Params.xlsx'
+params=${dir}'/Params.json'
 jmxRoute=${parent}'/SCRIPTS/Windows/'
 jmetersh=${dir}'/jmeterResults.sh'
 resultsFolder=${parent}'/Results/'

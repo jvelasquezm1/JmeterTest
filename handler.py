@@ -1,8 +1,7 @@
 import os
 import sys
 import time
-import pandas as pd
-import numpy
+import json
 
 
 # python <pythonFile> <bin_jmeter> <params_file> <jmx_file> <script.bat>
@@ -29,8 +28,10 @@ def params_ok(params):
 
 # Setting number of execution of the cycle
 def load_test_params(params_file):
-    df = pd.read_excel(params_file, sheet_name='Sheet1')
-    return df
+    params_file = sys.argv[2]
+    with open(params_file, 'r') as paramsJson:
+        datastore = json.load(paramsJson)
+        return datastore
 
 
 # Creating the folders to save the each execution results
@@ -47,22 +48,21 @@ def create_results_dir(script_name):
 # Creating parameters to jmeter_results script (jmeterResults2.bat)
 def start_test_suite(params_loaded):
     bat_file = sys.argv[3] + " "
-    for index, row in params_loaded.iterrows():
-        if row['Total Duration'] == row['Total Duration']:
-            duration = str(int(row['Total Duration']))
-            concurrency = str(int(row['Concurrence Users']))
-            ramp_up_period = str(int(row['Ramp-Up']))
-            jmx_file = sys.argv[5] + str(row['Jmeter Script'])
-            dir_name = create_results_dir(str(row['Jmeter Script']))
-            path_name = os.path.split(jmx_file)
-            file_name = path_name[-1].split(".")
-            result_file = os.path.join(dir_name, file_name[0] + "_c" + concurrency + "_d" + duration)
-            result_file_dash = os.path.join(dir_name, concurrency)
-            command = "%s %s %s %s %s %s %s" % (
-                bat_file, concurrency, duration, result_file, jmx_file, ramp_up_period, result_file_dash)
-            os.system(command)
-            msg = "Test for Jthread=%s and Jduration=%s ... done" % (concurrency, duration)
-            print(msg)
+    for data in params_loaded['params']:
+        duration = data['duration']
+        concurrency = data['concurrency']
+        ramp_up_period = data['rampup']
+        jmx_file = sys.argv[5] + data['script']
+        dir_name = create_results_dir(data['script'])
+        path_name = os.path.split(jmx_file)
+        file_name = path_name[-1].split(".")
+        result_file = os.path.join(dir_name, file_name[0] + "_c" + concurrency + "_d" + duration)
+        result_file_dash = os.path.join(dir_name, concurrency)
+        command = "%s %s %s %s %s %s %s" % (
+            bat_file, concurrency, duration, result_file, jmx_file, ramp_up_period, result_file_dash)
+        os.system(command)
+        msg = "Test for Jthread=%s and Jduration=%s ... done" % (concurrency, duration)
+        print(msg)
 
 
 main()
