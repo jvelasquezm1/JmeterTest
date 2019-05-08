@@ -28,8 +28,8 @@ MKDIR %dirBase_%%executionSuite_%
 SETX DATA_JSCRIPTS %dirBase_%%data_%
 SETX RESULT_JSCRIPTS %dirBase_%%results_%
 
-SET DATA_JSCRIPTS_ %dirBase_%%data_%
-SET RESULT_JSCRIPTS_ %dirBase_%%results_%
+SET DATA_JSCRIPTS_=%dirBase_%%data_%
+SET RESULT_JSCRIPTS_=%dirBase_%%results_%
 
 REM Step 3: Creating files
 SET executionSuiteZip_=%dirBase_%/executionSuite.zip
