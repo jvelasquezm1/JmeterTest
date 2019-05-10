@@ -1,17 +1,1 @@
-{
-    "params": 
-    [
-        {
-            "concurrency": "1",
-            "duration": "2",
-            "rampup": "0",
-            "script": "getAssessmentDetail.jmx"
-        },
-        {
-            "concurrency": "5",
-            "duration": "3",
-            "rampup": "0",
-            "script": "getAssessmentDetail.jmx"
-        }
-    ]
-}
+{"params":[{"concurrency":"1","duration":"2","rampup":"3","script":"getAssessmentDetail.jmx"},{"concurrency":"2","duration":"3","rampup":"5","script":"getAssessmentDetail.jmx"}]}

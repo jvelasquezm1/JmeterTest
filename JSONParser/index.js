@@ -31,7 +31,7 @@ sheet_name_list.forEach(function(y) {
         }
     })
     const jsonParams = {params}
-    fs.writeFile('../Params.json', JSON.stringify(jsonParams), function(err) {
+    fs.writeFile('Params.json', JSON.stringify(jsonParams), function(err) {
         if (err) {
             console.log(err);
         }

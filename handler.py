@@ -10,7 +10,8 @@ import json
 def main():
     if not params_ok(sys.argv):
         sys.exit()
-    params_file = sys.argv[2]
+    os.system('node JSONParser/index.js')
+    params_file = sys.argv[2] + "Params.json"
     params_loaded = load_test_params(params_file)
     start_test_suite(params_loaded)
 
@@ -28,7 +29,6 @@ def params_ok(params):
 
 # Setting number of execution of the cycle
 def load_test_params(params_file):
-    params_file = sys.argv[2]
     with open(params_file, 'r') as paramsJson:
         datastore = json.load(paramsJson)
         return datastore

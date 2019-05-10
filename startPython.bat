@@ -15,7 +15,7 @@ set executionResultsPath=%results%
 REM Python parameters
 set handlerPython=%workSpace%%executionSuite%handler4.py
 set jmeter=%jmeterPath%
-set params=%workSpace%%executionSuite%Params.json
+set params=%workSpace%%executionSuite%
 set jmxRoute=%workSpace%%jmeterScripts%
 set jmetersh=%workSpace%%executionSuite%jmeterResults.bat
 set resultsFolder=%workSpace%%executionResultsPath%
