@@ -24,7 +24,8 @@ sheet_name_list.forEach(function(y) {
         let rowParams = {};
         if(row['Concurrence Users']){
             row['Concurrence Users'] ? rowParams.concurrency = row['Concurrence Users'].toString() : [];
-            row['Total Duration'] ? rowParams.duration = row['Total Duration'].toString() : [];
+            row['Total Duration/Loops'] ? rowParams.duration_loops = row['Total Duration/Loops'].toString() : [];
+            row['Type'] ? rowParams.d_type = row['Type'].toString() : [];
             row['Ramp-Up'] ? rowParams.rampup = row['Ramp-Up'].toString() : [];
             row['Jmeter Script'] ? rowParams.script = row['Jmeter Script'].toString() : [];
             params.push(rowParams)
