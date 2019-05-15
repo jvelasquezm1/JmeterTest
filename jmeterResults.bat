@@ -14,11 +14,7 @@ set jmeterExePath=%jmeterExePath%
 REM cd %disk%
 cd %jmeterExePath%
 
-IF "%types%"="Duration" (
-    call jmeter -Jthreads=%concurrence% -Jduration=%duration_loops% -JrampUpPeriod=%rampUpPeriod% -n -t %jmxPath% -l %resultFile%.jtl >> %resultFile%.log -e -o %ResultFileDash%
-) ELSE (
-    call jmeter -Jthreads=%concurrence% -Jloops=%duration_loops% -JrampUpPeriod=%rampUpPeriod% -n -t %jmxPath% -l %resultFile%.jtl >> %resultFile%.log -e -o %ResultFileDash%
-)
+call jmeter -Jthreads=%concurrence% -Jduration=%duration_loops% -JrampUpPeriod=%rampUpPeriod% -Jjmeter.reportgenerator.overall_granularity=10000 -n -t %jmxPath% -l %resultFile%.jtl >> %resultFile%.log -e -o %ResultFileDash%
 
 set jmeterExtPath=%jmeterExtPath%
 

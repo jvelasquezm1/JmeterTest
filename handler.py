@@ -50,7 +50,7 @@ def start_test_suite(params_loaded):
     bat_file = sys.argv[3] + " "
     for data in params_loaded['params']:
         duration_loops = data['duration_loops']
-        d_type = data['type']
+        d_type = data['d_type']
         concurrency = data['concurrency']
         ramp_up_period = data['rampup']
         jmx_file = sys.argv[5] + data['script']
@@ -59,7 +59,7 @@ def start_test_suite(params_loaded):
         file_name = path_name[-1].split(".")
         result_file = os.path.join(dir_name, file_name[0] + "_c" + concurrency + "_d" + duration_loops)
         result_file_dash = os.path.join(dir_name, concurrency)
-        command = "%s %s %s %s %s %s %s" % (
+        command = "%s %s %s %s %s %s %s %s" % (
             bat_file, concurrency, duration_loops, result_file, jmx_file, ramp_up_period, result_file_dash, d_type)
         os.system(command)
         msg = "Test for Jthread=%s and Jduration=%s ... done" % (concurrency, duration_loops)
