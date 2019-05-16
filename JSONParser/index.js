@@ -23,10 +23,10 @@ sheet_name_list.forEach(function(y) {
     data.map(row => {
         let rowParams = {};
         if(row['Concurrence Users']){
-            row['Concurrence Users'] ? rowParams.concurrency = row['Concurrence Users'].toString() : [];
-            row['Total Duration/Loops'] ? rowParams.duration_loops = row['Total Duration/Loops'].toString() : [];
+            row['Concurrence Users'] ? rowParams.concurrency = row['Concurrence Users'].toString() : rowParams.concurrency = 0;
+            row['Total Duration/Loops'] ? rowParams.duration_loops = row['Total Duration/Loops'].toString() : rowParams.duration_loops = 0;
             row['Type'] ? rowParams.d_type = row['Type'].toString() : [];
-            row['Ramp-Up'] ? rowParams.rampup = row['Ramp-Up'].toString() : [];
+            row['Ramp-Up'] ? rowParams.rampup = row['Ramp-Up'].toString() : rowParams.rampup = 0;
             row['Jmeter Script'] ? rowParams.script = row['Jmeter Script'].toString() : [];
             params.push(rowParams)
         }

@@ -21,4 +21,4 @@ set jmetersh=%workSpace%%executionSuite%\utils\jmeterResults.bat
 set resultsFolder=%workSpace%%executionResultsPath%
 
 REM Execute python command
-python %handlerPython% %jmeter% %params% %jmetersh% %resultsFolder% %jmxRoute%
+python %handlerPython% %jmeter% %params% %jmetersh% %resultsFolder% %jmxRoute% %workSpace%

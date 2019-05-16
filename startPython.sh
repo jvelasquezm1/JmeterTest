@@ -14,4 +14,4 @@ jmetersh=${dir}'/utils/jmeterResults.sh'
 resultsFolder=${parent}'/Results/'
 
 #Execute python command
-python ${handlerPython} ${jmeter} ${params} ${jmetersh} ${resultsFolder} ${jmxRoute}
+python ${handlerPython} ${jmeter} ${params} ${jmetersh} ${resultsFolder} ${jmxRoute} ${dir}
