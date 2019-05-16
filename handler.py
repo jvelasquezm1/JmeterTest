@@ -35,11 +35,11 @@ def load_test_params(params_file):
 
 
 # Creating the folders to save the each execution results
-def create_results_dir(script_name):
+def create_results_dir(script_name, concurrency, duration_loops):
     results_path = sys.argv[4]
     date = time.ctime(time.time())
     formatted_date = date.replace(" ", "_").replace(":", ".")
-    folder_name = "%s%s%s" % (results_path, formatted_date, script_name)
+    folder_name = "%s%s%s%s%s%s%s" % (results_path, formatted_date, script_name, "_c", concurrency, "_d", duration_loops)
     if not os.path.exists(folder_name):
         os.mkdir(folder_name)
     return folder_name
@@ -54,7 +54,7 @@ def start_test_suite(params_loaded):
         concurrency = data['concurrency']
         ramp_up_period = data['rampup']
         jmx_file = sys.argv[5] + data['script']
-        dir_name = create_results_dir(data['script'])
+        dir_name = create_results_dir(data['script'], concurrency, duration_loops)
         path_name = os.path.split(jmx_file)
         file_name = path_name[-1].split(".")
         result_file = os.path.join(dir_name, file_name[0] + "_c" + concurrency + "_d" + duration_loops)

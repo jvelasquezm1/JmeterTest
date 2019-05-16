@@ -16,9 +16,9 @@ cd %jmeterExePath%
 
 call jmeter -Jthreads=%concurrence% -Jduration=%duration_loops% -JrampUpPeriod=%rampUpPeriod% -Jjmeter.reportgenerator.overall_granularity=10000 -n -t %jmxPath% -l %resultFile%.jtl >> %resultFile%.log -e -o %ResultFileDash%
 
-set jmeterExtPath=%jmeterExtPath%
+REM set jmeterExtPath=%jmeterExtPath%
 
-cd %jmeterExtPath%
+REM cd %jmeterExtPath%
 
-call JMeterPluginsCMD.bat --generate-csv %resultFile%.csv --input-jtl %resultFile%.jtl --plugin-type AggregateReport
+REM call JMeterPluginsCMD.bat --generate-csv %resultFile%.csv --input-jtl %resultFile%.jtl --plugin-type AggregateReport
 
