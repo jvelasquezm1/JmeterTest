@@ -15,4 +15,4 @@ cd Results
 
 ${jmeterExePath}jmeter -Jthreads=${concurrence} -Jduration=${duration_loops} -JrampUpPeriod=${rampUpPeriod} -Jjmeter.reportgenerator.overall_granularity=10000 -n -t ${jmxPath} -l ${resultFile}.jtl >> ${resultFile}.log -e -o ${ResultFileDash}
 
-${jmeterExtPath}JMeterPluginsCMD.sh --generate-csv ${resultFile}.csv --input-jtl ${resultFile}.jtl --plugin-type AggregateReport
+# ${jmeterExtPath}JMeterPluginsCMD.sh --generate-csv ${resultFile}.csv --input-jtl ${resultFile}.jtl --plugin-type AggregateReport
