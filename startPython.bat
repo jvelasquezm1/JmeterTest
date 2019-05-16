@@ -13,11 +13,11 @@ REM Path to save the result of cycle executions
 set executionResultsPath=%results%
 
 REM Python parameters
-set handlerPython=%workSpace%%executionSuite%handler4.py
+set handlerPython=%workSpace%%executionSuite%\utils\handler4.py
 set jmeter=%jmeterPath%
 set params=%workSpace%%executionSuite%
 set jmxRoute=%workSpace%%jmeterScripts%
-set jmetersh=%workSpace%%executionSuite%jmeterResults.bat
+set jmetersh=%workSpace%%executionSuite%\utils\jmeterResults.bat
 set resultsFolder=%workSpace%%executionResultsPath%
 
 REM Execute python command

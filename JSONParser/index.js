@@ -1,6 +1,6 @@
 let XLSX = require('xlsx');
 let fs = require('fs');
-let workbook = XLSX.readFile('./Params.xlsx');
+let workbook = XLSX.readFile('../Params.xlsx');
 let sheet_name_list = workbook.SheetNames;
 params = [];
 sheet_name_list.forEach(function(y) {

@@ -10,8 +10,9 @@ import json
 def main():
     if not params_ok(sys.argv):
         sys.exit()
-    os.system('node JSONParser/index.js')
-    params_file = sys.argv[2] + "Params.json"
+    os.system('node ./JSONParser/index.js')
+    os.chdir('..')
+    params_file = sys.argv[2] + "/utils/Params.json"
     params_loaded = load_test_params(params_file)
     start_test_suite(params_loaded)
 
