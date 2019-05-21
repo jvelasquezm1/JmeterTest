@@ -1,17 +1,23 @@
 #! /bin/bash
 
-dir=${PWD}
+dir=$PWD
 cd ..
-parent=${PWD}
-cd EXECUTION_SUITE
+parent=$PWD
+cd ..
+workspace=$PWD
+cd ..
+cd ..
+cd ..
+projects=$PWD
+cd Projects/FLEX/FLEX_ASSESSMENT_SERVICES/EXECUTION_SUITE/utils
 
 #Files
-handlerPython=${dir}'/utils/handler.py'
+handlerPython=${dir}'/handler4.py'
 jmeter=${JMETER_HOME}'/bin/jmeter'
-params=${dir}'/Params.json'
-jmxRoute=${parent}'/SCRIPTS/Windows/'
-jmetersh=${dir}'/utils/jmeterResults.sh'
-resultsFolder=${parent}'/Results/'
+params=${parent}
+jmxRoute=${workspace}'/SCRIPTS/Windows/'
+jmetersh=${dir}'/jmeterResults.sh'
+resultsFolder=${workspace}'/Results/'
 
 #Execute python command
-python ${handlerPython} ${jmeter} ${params} ${jmetersh} ${resultsFolder} ${jmxRoute} ${dir}
+python ${handlerPython} ${jmeter} ${params} ${jmetersh} ${resultsFolder} ${jmxRoute} ${projects}

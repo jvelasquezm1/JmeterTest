@@ -19,6 +19,9 @@ executionSuiteZip=executionSuite.zip
 jmeterScriptsZip=jmeterScripts.zip
 dataZip=data.zip
 
+echo DATA_JSCRIPTS=${data} >> /etc/environment
+echo RESULT_JSCRIPTS=${results} >> /etc/environment
+
 unzip ${executionSuiteZip} -d ${executionSuite}
 unzip ${jmeterScriptsZip} -d ${jmeterScripts}
 unzip ${dataZip} -d ${data}

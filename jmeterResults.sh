@@ -17,6 +17,7 @@ jmeterExtPath=${JMETER_HOME}'/lib/ext/'
 cd ..
 cd Results
 
+set -x
 ${jmeterExePath}jmeter -Jthreads=${concurrence} -Jduration=${duration_loops} -Jprotocol=${protocol} -JserverTest=${serverTest} -Japikey=${apiKey} -JinternalServer=${internalServer}  -JrampUpPeriod=${rampUpPeriod} -Jjmeter.reportgenerator.overall_granularity=10000 -n -t ${jmxPath} -l ${resultFile}.jtl >> ${resultFile}.log -e -o ${ResultFileDash}
 
 # ${jmeterExtPath}JMeterPluginsCMD.sh --generate-csv ${resultFile}.csv --input-jtl ${resultFile}.jtl --plugin-type AggregateReport
