@@ -1,20 +1,29 @@
 let fs = require('fs');
 let csvInFile = process.argv.slice(2)[0];
 let csvOutFile = process.argv.slice(2)[1];
-let arrOutResultId = [];
 
-fs.readFile(csvOutFile, 'utf8', function (err, data) {
-    let rows = data.split('\n');
-    let rowsOut = rows.map(line => line.split(';'));
-    rowsOut.filter(line => line[3] !== undefined ? arrOutResultId.push(line[3]) : '');
-});
+function readContent(callback) {
+    fs.readFile(csvOutFile, 'utf8', function (err, data) {
+        let rows = data.split('\n');
+        let rowsOut = rows.map(line => line.split(';'));
+        callback(null, rowsOut.length)
+    });
+}
 
-fs.readFile(csvInFile, 'utf8', function (err, data) {
-    let linesExceptFirst = data.split('\n');
-    let linesArr = linesExceptFirst.map(line => line.split(';'));
-    for (let i = 0; i < arrOutResultId.length; i++) {
-        let output = linesArr.filter(line => !arrOutResultId.includes(line[3])).join("\n");
-        let semicolonOutput = output.replace(/,/g, ';');
-        fs.writeFileSync(csvInFile, semicolonOutput);
-    }
-});
+function updateFile(rowsOut) {
+    console.log('-----------------READ IN FILE-----------------')
+    fs.readFile(csvInFile, 'utf8', async function (err, data) {
+        let linesExceptFirst = data.split('\n');
+        let linesArr = linesExceptFirst.map(line => line.split(';'));
+        const output = linesArr.splice(rowsOut, linesExceptFirst.length - 1).join("\n");
+        const header = 'patientId;assessmentId;resultId\n';
+        const outputHeader = header.concat(output);
+        fs.writeFileSync(csvInFile, outputHeader);
+        fs.writeFileSync(csvOutFile, []);
+    });
+}
+
+console.log('-----------------START DATA IN UPDATE-----------------')
+readContent(function (err, content) {
+    updateFile(content);
+})

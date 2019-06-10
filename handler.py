@@ -69,12 +69,12 @@ def start_test_suite(params_loaded):
             protocol, serverTest, apiKey, internalServer)
         os.system(command)
         msg = "Test for Jthread=%s and Jduration=%s ... done" % (concurrency, duration_loops)
-        if(data["script"].lower().find("delete") == -1):
+        if(data["script"].lower().find("deletedassessmentresult") == -1):
             print(msg)
         else:
-            scriptName = data["script"].replace("jmx", "csv")
-            dataIn = os.path.join(sys.argv[6],"Projects","FLEX","FLEX_ASSESSMENT_SERVICES","Data","dataIn"+scriptName)
-            dataOut = os.path.join(sys.argv[6],"Projects","FLEX","FLEX_ASSESSMENT_SERVICES","Data","dataOut"+scriptName)
+            scriptName = data["script"].replace(".jmx", "")
+            dataIn = os.path.join(sys.argv[6],"Projects","FLEX","FLEX_ASSESSMENT_SERVICES","Data","dataIn"+scriptName[0].upper()+scriptName[1:]+"_1"+".csv")
+            dataOut = os.path.join(sys.argv[6],"Projects","FLEX","FLEX_ASSESSMENT_SERVICES","Data","dataOut"+scriptName[0].upper()+scriptName[1:]+"_1"+".csv")
             os.system("node " + os.path.join(".", "utils", "JSONParser", "newDataIn.js") + " " + dataIn + " " + dataOut)
             print("Data In updated")
             print(msg)
